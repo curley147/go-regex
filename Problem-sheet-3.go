@@ -19,18 +19,24 @@ func random(min, max int) int {
 //response method 
 func ElizaResponse(input string)(string){
 	//saved responses array
-	responses := [4] string{}
-	responses[0] = "I’m not sure what you’re trying to say. Could you explain it to me?"
-	responses[1] = "How does that make you feel?"
-	responses[2] = "Why do you say that?"
-	responses[3] = "Why don’t you tell me more about your father?"
+	responses := [4] string {
+		"I’m not sure what you’re trying to say. Could you explain it to me?",
+		"How does that make you feel?",
+		"Why do you say that?",
+		"Why don’t you tell me more about your father?"}
 	//using regex methods to look for certain patterns
-	matched, err := regexp.MatchString("^[Ff]ather*", input)
+	match, err := regexp.MatchString("(?i).*\b[Ff]ather\b.*", input)
 	//certain match returns certain response or error message
-	if (matched == true && err == nil){
+	if (match == true && err == nil){
 		return responses[3]
-	} else if(matched == false && err == nil){
-		return responses[random(0, 2)]
+	} else if(match == false && err == nil){#
+		//check for "I am" in input string
+		re := regexp.MustCompile("(?i)I am ([^.?!]*)[.?!]?")
+		if matched := re.MatchString(input); matched {
+			return re.ReplaceAllString(input, "How do you know you are $1?")
+		} else {
+			return responses[random(0, len(responses))]
+		} 
 	} else {
 		return "Error message"
 	}
