@@ -5,23 +5,34 @@ package main
 //import packages
 import (
 	"fmt"
-	"strings"
 	"bufio"
 	"os"
+	"regexp"
+	"math/rand"
+	"time"
 )
+//random number generator method
+func random(min, max int) int {
+    rand.Seed(time.Now().Unix())
+    return rand.Intn(max - min) + min
+}
 //response method 
 func ElizaResponse(input string)(string){
-	//saved responses
-	str1 := "I’m not sure what you’re trying to say. Could you explain it to me?"
-	str2 := "How does that make you feel?"
-	str3 := "Why do you say that?"
-	//using contains method to look for certain patterns
-	if (strings.Contains(input, "father")==true){
-		return str3
-	} else if(strings.Contains(input, "mother")==true) {
-		return str2
+	//saved responses array
+	responses := [4] string{}
+	responses[0] = "I’m not sure what you’re trying to say. Could you explain it to me?"
+	responses[1] = "How does that make you feel?"
+	responses[2] = "Why do you say that?"
+	responses[3] = "Why don’t you tell me more about your father?"
+	//using regex methods to look for certain patterns
+	matched, err := regexp.MatchString("^[Ff]ather*", input)
+	//certain match returns certain response or error message
+	if (matched == true && err == nil){
+		return responses[3]
+	} else if(matched == false && err == nil){
+		return responses[random(0, 2)]
 	} else {
-		return str1
+		return "Error message"
 	}
 }
 //main function
