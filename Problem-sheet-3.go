@@ -29,11 +29,11 @@ func ElizaResponse(input string)(string){
 	//certain match returns certain response or error message
 	if (match == true && err == nil){
 		return responses[3]
-	} else if(match == false && err == nil){#
-		//check for "I am" in input string
-		re := regexp.MustCompile("(?i)I am ([^.?!]*)[.?!]?")
-		if matched := re.MatchString(input); matched {
-			return re.ReplaceAllString(input, "How do you know you are $1?")
+	} else if(match == false && err == nil){
+		//check for "I am", "I'm", "Iam", "i'm", "i am", "iam" in input string
+		re := regexp.MustCompile("(?i)(i[' a]*m)(.*)")
+		if (re.MatchString(input) == true) {
+			return re.ReplaceAllString(input, "How do you know you are $2?")
 		} else {
 			return responses[random(0, len(responses))]
 		} 
