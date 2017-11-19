@@ -11,11 +11,11 @@ Clone this repository using Git.
 
 1. Enter: git clone https://github.com/curley147/go-regex.git 
 2. Change into the folder: cd go-regex 
-3. Compile the first file with the following command. go build Problem-sheet-3.go 
-4. Run the executable produced. go run Problem-sheet-3.go. 
+3. Compile the file with the following command: go build Problem-sheet-3.go 
+4. Run the executable produced: go run Problem-sheet-3.go. 
 5. Follow program instructions.
-Repeat steps 3 and 4 above, replacing the filenames as appropriate
 
+Each question on the Problem sheet is referred in each commit name to Problem-sheet-3.go (ie "Q1 complete" refers to Q1 etc.)
 Built with: These programs were built using Visual Studio Code.
 
 Acknowledements: stackoverflow github golang/regex.org
